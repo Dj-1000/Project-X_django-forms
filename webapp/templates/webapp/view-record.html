@@ -1,0 +1,46 @@
+{% extends 'webapp/base.html' %}
+
+{% block content %}
+
+    {% if record %}
+        <strong>
+            {{record.last_name | upper}}
+
+            {{record.first_name}}
+        </strong>
+
+        <hr>
+        <div class="card-body">
+            <p><strong> ID: </strong> {{record.id}} </p>
+
+            <p><strong> First Name: </strong> {{record.first_name}} </p>
+
+            <p><strong> Last Name: </strong> {{record.last_name}} </p>
+
+            <p><strong> Email: </strong> {{record.email}} </p>
+
+            <p><strong> Phone Number: </strong> {{record.phone}} </p>
+
+            <p><strong> Address: </strong> {{record.address}} </p>
+
+            <p><strong> City: </strong> {{record.city}} </p>
+
+            <p><strong> State: </strong> {{record.state}} </p>
+        </div>
+
+    {% else %}
+        <h3>Sorry the record doesn't exist!</h3>
+        <a href="{% url 'dashboard' %}">
+            <h5>Please try again</h5>
+        </a>
+
+    {% endif %}
+
+    <div>
+        <a type="button" class="btn btn-secondary btn-sm" href="{% url 'dashboard' %}"><i class="fa-solid fa-circle-chevron-left"></i> Return</i></a>
+        <a type="button" class="btn btn-primary btn-sm" href="{% url 'update-record' record.id %}">Update <i class="fa-solid fa-pen-to-square"></i></a>
+        <a type="button" class="btn btn-danger btn-sm" href="{% url 'delete-record' record.id %}">Delete <i class="fa-solid fa-trash"></i></a>
+    </div>
+
+
+{% endblock %}

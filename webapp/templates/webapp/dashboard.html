@@ -1,0 +1,48 @@
+{% extends 'webapp/base.html' %}
+
+{% block content %}
+<h3 class="text-center">
+    Welcome to the Dashboard {{user}}
+</h3>
+<hr>
+<br>
+
+<table class="table table-light table-hover table-layout table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">Date Joined</th>
+            <th scope="" col">View</th>
+        </tr>
+    </thead>
+
+    {% for record in records %}
+    <tbody>
+
+        <tr>
+            <th scope="row">{{record.id}}</th>
+            <td>{{record.first_name}}</td>
+            <td>{{record.last_name}}</td>
+            <td>{{record.email}}</td>
+            <td>{{record.phone}}</td>
+            <td>{{record.address}}</td>
+            <td>{{record.creation_date.date}}</td>
+            <td><a type="button"  href="{% url 'view-record' record.id %}"><i class="fa-solid fa-eye" style="color: #0c86e4;"></i></a></td>
+        </tr>
+
+    </tbody>
+    {% endfor %}
+</table>
+
+
+<a type="button" class="btn btn-outline-primary btn-sm" href="{% url 'create-record' %}">
+    <i class="fa-solid fa-user-plus"></i>
+    Create a new record
+</a>
+
+{% endblock %}
