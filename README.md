@@ -1,7 +1,7 @@
 # Project-X_django-forms
 
 This is a simple Django Project that uses the Django-forms feature for user login and log-out. It contains all the CRUD implementations. <br>
-Uses HTML, Bootstrap-CSS and Django-crispy-forms as fron-end and Django as a backend along with SQLite database.
+Uses HTML, Bootstrap-CSS and Django-crispy-forms as front-end and Django as a backend along with SQLite database.
 
 
 
