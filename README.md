@@ -1,8 +1,10 @@
-# Project-X_django-forms
+# Django Project Overview
 
-This is a simple Django Project that uses the Django-forms feature for user login, log-out and register.<br> 
-It contains all the CRUD implementations. <br>
-Uses HTML, Bootstrap-CSS and Django-crispy-forms as front-end and Django as a backend along with SQLite database.
+- This Django project is designed to facilitate user authentication processes, incorporating Django's form functionalities for seamless user login, logout, and registration.
+- It encompasses comprehensive CRUD operations for enhanced data management.
+- Front-end components are developed using HTML, Bootstrap-CSS, and Django-crispy-forms.
+- Django serves as the robust backend framework, supported by an SQLite database.
+
 
 
 
