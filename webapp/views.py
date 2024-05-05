@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from .models import Record
 from django.http import Http404, HttpResponseBadRequest
+from django.db.models import Q
 
 def home(request):
     return render(request, "webapp/index.html")
@@ -41,7 +42,7 @@ def login(request):
 
 @login_required
 def dashboard(request):
-    records = Record.objects.all()
+    records = Record.objects.filter(created_by = request.user).all()
 
     return render(
         request,
@@ -55,10 +56,13 @@ def dashboard(request):
 @login_required
 def create_record(request):
     form = CreateRecordForm()
+    print(request.user)
     if request.method == "POST":
         form = CreateRecordForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            record = form.save(commit=False)
+            record.created_by = request.user
+            record.save()
             return redirect("dashboard")
 
     return render(request, "webapp/create-record.html", context={"form": form})
@@ -66,7 +70,7 @@ def create_record(request):
 
 @login_required
 def update_record(request, pk):
-    record = Record.objects.filter(id=pk).first()
+    record = Record.objects.filter(Q(id=pk) & Q(created_by = request.user)).first()
     if not record:
         return render(request,'webapp/404.html',context={'message':'Sorry! record not found'})
     form = UpdateRecordForm(instance=record)
@@ -74,19 +78,19 @@ def update_record(request, pk):
         form = UpdateRecordForm(instance=record, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect("login")
+            return redirect("dashboard")
 
     return render(request, "webapp/update-record.html", context={"form": form})
 
 
 @login_required
 def view_record(request, pk):
-    record = Record.objects.filter(id=pk).first()
+    record = Record.objects.filter(Q(id=pk) & Q(created_by = request.user)).first()
     return render(request, "webapp/view-record.html", context={"record": record})
 
 @login_required
 def delete_record(request,pk):
-    record = Record.objects.filter(id=pk).first()
+    record = Record.objects.filter(Q(id=pk) & Q(created_by = request.user)).first()
     if record is None:
         message = "Sorry! This objects doesn't exist"
         return redirect("webapp/404.html",context = {'message':message})

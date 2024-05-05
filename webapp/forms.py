@@ -23,6 +23,13 @@ class CreateRecordForm(forms.ModelForm):
         model = Record
         fields = ['first_name','last_name','email','phone','address','city','state']
         
+    # def save(self, commit=True):
+    #     instance = super().save(commit=False)  # Save without saving to database
+    #     instance.user = self.user  # Access user from request context
+    #     if commit:
+    #         instance.save()  # Save to database if commit=True
+    #     return instance
+        
 class UpdateRecordForm(forms.ModelForm):
     class Meta:
         model = Record
