@@ -80,6 +80,7 @@ WSGI_APPLICATION = "crm.wsgi.application"
 #         'HOST': os.environ.get('DB_HOST'),
 #         'PORT': os.environ.get('PORT'),
 #     }}
+'''To connect external db to PG ADMIN, use entire EXTERNAL_DB url after as hostname@ '''
 DATABASES = {
     "default": dj_database_url.config(
         default=os.environ.get("DATABASE_URL"),
